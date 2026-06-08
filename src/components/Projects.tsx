@@ -69,26 +69,26 @@ export function Projects() {
         <div className="grid md:grid-cols-3 gap-6">
           {projects.map((p) => (
             <article
-              key={p.title}
+              key={p?.title}
               className="group relative glass border border-border/60 rounded-2xl overflow-hidden hover:border-primary/50 transition-all hover:-translate-y-1 shadow-card flex flex-col"
             >
               {/* IMAGE */}
               <div className="h-44 relative overflow-hidden bg-secondary/40">
                 <img
-                  src={p.image}
-                  alt={`Preview do projeto ${p.title}`}
+                  src={p?.image}
+                  alt={`Preview do projeto ${p?.title}`}
                   loading="lazy"
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
                 <div className="absolute bottom-3 left-4 font-mono text-xs text-primary-foreground/90">
-                  ./{p.title.toLowerCase().replace(/\s+/g, "-")}
+                  ./{p?.title.toLowerCase().replace(/\s+/g, "-")}
                 </div>
               </div>
 
               {/* CONTENT */}
               <div className="p-6 flex flex-col flex-1">
-                <h3 className="text-lg font-semibold mb-2">{p.title}</h3>
+                <h3 className="text-lg font-semibold mb-2">{p?.title}</h3>
 
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
                   {p.desc}
@@ -96,7 +96,7 @@ export function Projects() {
 
                 {/* TECH */}
                 <div className="flex flex-wrap gap-2 mb-5">
-                  {p.tech.map((t) => (
+                  {p?.tech.map((t) => (
                     <span
                       key={t}
                       className="text-xs font-mono px-2 py-1 rounded-md bg-secondary/60 text-muted-foreground border border-border/60"
@@ -108,7 +108,7 @@ export function Projects() {
 
                 {/* ACTIONS */}
                 <div className="flex gap-2">
-                  {p.live && (
+                  {p?.live && (
                     <a
                       href={p.live}
                       target="_blank"
@@ -121,11 +121,11 @@ export function Projects() {
                   )}
 
                   <a
-                    href={p.repo}
+                    href={p?.repo}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`${
-                      p.live ? "" : "flex-1"
+                      p?.live ? "" : "flex-1"
                     } inline-flex items-center justify-center gap-2 text-sm px-3 py-2 rounded-lg border border-border hover:border-primary/50 hover:bg-card transition-all`}
                   >
                     <img
