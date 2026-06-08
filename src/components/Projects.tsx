@@ -1,5 +1,7 @@
 import { ExternalLink } from "lucide-react";
 import streetCoreImg from "@/assets/project-streetcore.png";
+import chat2order from "@/assets/chat2order.png";
+import chat2orderlanging from "@/assets/chat2orderlandingpage.png";
 import precifyImg from "@/assets/project-precify.png";
 import aimdeskImg from "@/assets/project-aimdesk.png";
 import githubIcon from "@/assets/github.png";
@@ -13,6 +15,23 @@ const projects = [
     image: streetCoreImg,
     live: "https://street-core.onrender.com/",
     repo: "https://github.com/CesarDanilo/street-core",
+  },
+  {
+    title: "Chat2Order",
+    desc: "O Chat2Order Frontend é a camada de interface do sistema Chat2Order — uma aplicação web voltada para clientes finais realizarem pedidos de forma simples e fluida, sem necessidade de canais externos.",
+    tech: ["React", "TypeScript", "Tailwind"],
+    image: chat2order,
+    live: "https://chat2order-frontend.vercel.app/",
+    repo: "https://github.com/CesarDanilo/Chat2Order-frontend",
+  },
+  ,
+  {
+    title: "Chat2Order Landing Page",
+    desc: "O Chat2Order é um ecossistema completo de software desenvolvido para resolver um problema operacional crítico: a gestão de pedidos descentralizados em conversas de aplicativos de mensagens. Através da integração de Inteligência Artificial.",
+    tech: ["React", "TypeScript", "Tailwind"],
+    image: chat2orderlanging,
+    live: "https://chat2order-landing.vercel.app//",
+    repo: "https://github.com/CesarDanilo/chat2order-landing",
   },
   {
     title: "Precify",
@@ -30,6 +49,7 @@ const projects = [
     live: null,
     repo: "https://github.com/CesarDanilo/aimdesk-ecommerce",
   },
+  
 ];
 
 export function Projects() {
