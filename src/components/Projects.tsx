@@ -91,7 +91,7 @@ export function Projects() {
                 <h3 className="text-lg font-semibold mb-2">{p?.title}</h3>
 
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
-                  {p.desc}
+                  {p?.desc}
                 </p>
 
                 {/* TECH */}
