@@ -1,62 +1,35 @@
-import githubIcon from "@/assets/github.png";
-import linkedinIcon from "@/assets/linkedin.png";
-import { Mail } from "lucide-react";
+import { useLang } from '../i18n/LangContext'
+import { CONTACT } from '../data/contact'
+import { GithubIcon, LinkedinIcon } from './BrandIcons'
 
-export function Footer() {
+export default function Footer() {
+  const { t } = useLang()
+  const year = new Date().getFullYear()
+
   return (
-    <footer className="border-t border-border/60 py-10 px-6 mt-12">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <p className="text-sm text-muted-foreground font-mono">
-          © {new Date().getFullYear()} César Danilo · Construído com café e código.
-        </p>
-
-        <div className="flex items-center gap-2">
-          {[
-            {
-              type: "img",
-              icon: githubIcon,
-              alt: "GitHub",
-              href: "https://github.com/CesarDanilo",
-            },
-            {
-              type: "img",
-              icon: linkedinIcon,
-              alt: "LinkedIn",
-              href: "https://www.linkedin.com/in/césar-danilo-396408153",
-            },
-            {
-              type: "component",
-              icon: Mail,
-              alt: "Email",
-              href: "mailto:cesardanilopalacios390@gmail.com",
-            },
-          ].map((item, i) => {
-            const isComponent = item.type === "component";
-            const Icon = item.icon as any;
-
-            return (
-              <a
-                key={i}
-                href={item.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={item.alt}
-                className="h-9 w-9 inline-flex items-center justify-center rounded-lg border border-border hover:border-primary/60 hover:bg-card transition-all"
-              >
-                {isComponent ? (
-                  <Icon className="w-4 h-4" />
-                ) : (
-                  <img
-                    src={item.icon as string}
-                    alt={item.alt}
-                    className="w-4 h-4 object-contain"
-                  />
-                )}
-              </a>
-            );
-          })}
+    <footer style={{ borderTop: '1px solid var(--border)', padding: '32px 0' }}>
+      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+        <div>
+          <a href="#" style={{ fontFamily: 'var(--font-mono)', fontSize: 14, color: 'var(--accent)', textDecoration: 'none' }}>cd/</a>
+          <span style={{ fontSize: 13, color: 'var(--text-faint)', marginLeft: 16 }}>© {year} César Danilo. {t.footer.rights}</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+          <span style={{ fontSize: 12, color: 'var(--text-faint)', fontFamily: 'var(--font-mono)' }}>
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', display: 'inline-block', marginRight: 6, verticalAlign: 'middle' }} />
+            {t.footer.availableFor}
+          </span>
+          <a href={CONTACT.github} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}>
+            <GithubIcon size={18} />
+          </a>
+          <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}>
+            <LinkedinIcon size={18} />
+          </a>
         </div>
       </div>
     </footer>
-  );
+  )
 }
