@@ -1,6 +1,7 @@
 import chat2order from "../assets/screenshots/chat2order.png"
 import clinica from "../assets/screenshots/clinica.png"
 import mei_finance from "../assets/screenshots/mei-finance.png"
+import mei_finance_landing from "../assets/screenshots/mei-finance-landing.png"
 
 export interface Project {
   id: string
@@ -104,6 +105,40 @@ export const projects: Project[] = [
       problem: 'Clinics depend on referrals and lack professional digital presence. Without a credibility-conveying page, they lose private patients to competitors with modern websites.',
       decision: 'High-conversion landing page with social proof, key services presentation, WhatsApp scheduling CTA, and a design that conveys clinical trust — load time under 1.5s.',
       result: 'Ready-to-replicate template for any clinic. Professional visual standard competing with large dental chain websites at accessible development cost.',
+    },
+  },
+  {
+    id: 'landing-mei-finance',
+    image: mei_finance_landing,
+    liveUrl: 'https://mei-finance-landing.vercel.app/',
+    status: 'production',
+    tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
+    terminal: [
+      '$ mei-finance --audit',
+      '→ performance: 97/100',
+      '→ accessibility: 100/100',
+      '→ load_time: 1.2s',
+      '→ cta_signup: active ✓',
+    ],
+    pt: {
+      title: 'MEI Finance — Landing Page',
+      tagline: 'Landing page de conversão para uma ferramenta de controle financeiro para MEIs',
+      problem:
+        'O produto precisava de uma página que comunicasse valor para um público sem formação financeira, convertesse visitantes em cadastros e transmitisse confiança sem parecer software corporativo.',
+      decision:
+        'Landing page com estrutura focada em conversão: apresentação do problema, prova social com depoimentos reais, demonstração visual das funcionalidades e CTA direto para cadastro gratuito — sem fricção.',
+      result:
+        'Design dark minimalista com accent verde que equilibra credibilidade e simplicidade. Estrutura replicável para outros produtos SaaS voltados ao público MEI.',
+    },
+    en: {
+      title: 'MEI Finance — Landing Page',
+      tagline: 'Conversion landing page for a financial control tool targeting Brazilian solo entrepreneurs',
+      problem:
+        'The product needed a page that communicated value to a non-financial audience, converted visitors into signups, and built trust without feeling like enterprise software.',
+      decision:
+        'Conversion-focused landing page with problem framing, real user testimonials, visual feature demos, and a frictionless free signup CTA — no credit card required.',
+      result:
+        'Minimalist dark design with green accent balancing credibility and simplicity. Replicable structure for other SaaS products targeting the Brazilian MEI market.',
     },
   },
 ]
