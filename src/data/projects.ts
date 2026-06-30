@@ -2,6 +2,7 @@ import chat2order from "../assets/screenshots/chat2order.png"
 import clinica from "../assets/screenshots/clinica.png"
 import mei_finance from "../assets/screenshots/mei-finance.png"
 import mei_finance_landing from "../assets/screenshots/mei-finance-landing.png"
+import apex_academy_landing from "../assets/screenshots/apex_academy_landing.png"
 
 export interface Project {
   id: string
@@ -23,62 +24,6 @@ export interface ProjectContent {
 }
 
 export const projects: Project[] = [
-  {
-    id: 'chat2order',
-    image: chat2order,
-    liveUrl: 'https://chat2order-frontend.vercel.app/',
-    status: 'production',
-    tech: ['React', 'Node.js', 'TypeScript', 'PostgreSQL', 'Docker', 'OpenAI'],
-    terminal: [
-      '$ chat2order --incoming "2 x-salada s/ cebola e suco laranja"',
-      '→ llm.extract() ... [128ms]',
-      '→ { items: [{name:"x-salada",qty:2,obs:"sem cebola"},{name:"suco",qty:1}] }',
-      '→ order.persist() ... OK',
-      '→ dashboard.push() ... LIVE ✓',
-    ],
-    pt: {
-      title: 'Chat2Order',
-      tagline: 'IA que transforma texto livre do WhatsApp em pedido estruturado',
-      problem: 'Restaurantes perdiam pedidos porque clientes escrevem de formas imprevisíveis no WhatsApp — "quero 2 x-salada sem cebola e um suco de laranja grande" virava um pesadelo manual.',
-      decision: 'Integrei a API da OpenAI com schema de extração estruturada: o modelo retorna sempre um JSON com itens, quantidades e observações — sem pós-processamento de regex. Pipeline: WhatsApp → webhook → LLM → banco → painel em tempo real.',
-      result: 'Zero pedidos perdidos por interpretação manual. O operador vê o pedido estruturado em menos de 2s após o cliente enviar. Sistema em uso real por estabelecimentos parceiros.',
-    },
-    en: {
-      title: 'Chat2Order',
-      tagline: 'AI that turns WhatsApp free text into structured orders',
-      problem: 'Restaurants lost orders because customers write in unpredictable ways on WhatsApp. Parsing "2 burgers no onion and a large OJ" manually was a nightmare.',
-      decision: 'Integrated OpenAI API with structured extraction schema: model always returns JSON with items, quantities and notes — no regex post-processing. Pipeline: WhatsApp → webhook → LLM → DB → real-time dashboard.',
-      result: 'Zero orders lost to manual interpretation. Operator sees structured order in under 2s after customer sends. System in real use by partner establishments.',
-    },
-  },
-  {
-    id: 'mei-finance',
-    image: mei_finance,
-    liveUrl: 'https://mei-finance-frontend.vercel.app/',
-    status: 'production',
-    tech: ['React', 'TypeScript', 'TanStack Router', 'shadcn/ui', 'Zod', 'Node.js'],
-    terminal: [
-      '$ mei-finance --status',
-      '→ receita_acumulada: R$ 54.320,00',
-      '→ limite_mei: R$ 81.000,00',
-      '→ percentual: 67.1%  ⚠ alerta ativo > 70%',
-      '→ meses_restantes: 4',
-    ],
-    pt: {
-      title: 'MEI Finance',
-      tagline: 'Controle financeiro pensado para o microempreendedor brasileiro',
-      problem: 'Microempreendedores gerenciam finanças em cadernos ou planilhas e não sabem quando estão se aproximando do limite anual do MEI (R$ 81mil) — o que pode resultar em desenquadramento tributário inesperado.',
-      decision: 'Construí um sistema com autenticação JWT, categorização de transações, dashboard de fluxo de caixa e alerta proativo que calcula em tempo real o percentual do limite MEI consumido.',
-      result: 'Solução pronta para SaaS B2C. Arquitetura modular com TanStack Router e code splitting automático, permitindo onboarding de novos microempreendedores sem atrito.',
-    },
-    en: {
-      title: 'MEI Finance',
-      tagline: 'Financial control built for the Brazilian solo entrepreneur',
-      problem: 'Solo entrepreneurs track finances in notebooks and don\'t know when they\'re approaching the annual MEI revenue cap (BRL 81k) — risking unexpected tax reclassification.',
-      decision: 'Built a system with JWT auth, transaction categorization, cash flow dashboard and a proactive alert that calculates in real time the percentage of the MEI cap consumed.',
-      result: 'Production-ready B2C SaaS architecture. Modular TanStack Router setup with automatic code splitting, enabling frictionless onboarding.',
-    },
-  },
   {
     id: 'clinica',
     image: clinica,
@@ -139,6 +84,96 @@ export const projects: Project[] = [
         'Conversion-focused landing page with problem framing, real user testimonials, visual feature demos, and a frictionless free signup CTA — no credit card required.',
       result:
         'Minimalist dark design with green accent balancing credibility and simplicity. Replicable structure for other SaaS products targeting the Brazilian MEI market.',
+    },
+  },
+  {
+    id: 'landing-apex-academy',
+    image: apex_academy_landing,
+    liveUrl: 'https://apex-academy-eta.vercel.app/',
+    status: 'production',
+    tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Lucide React'],
+    terminal: [
+      '$ apex-academy --audit',
+      '→ performance: 96/100',
+      '→ responsive: mobile ✓ desktop ✓',
+      '→ load_time: 1.4s',
+      '→ cta_enroll: active ✓',
+    ],
+    pt: {
+      title: 'Apex Academy — Landing Page',
+      tagline: 'Landing page moderna para academia, com foco em apresentação de marca e captação de novos alunos',
+      problem:
+        'A academia precisava de uma página que comunicasse a identidade da marca, apresentasse modalidades e planos de forma clara, e convertesse visitantes em novos alunos através de CTAs estratégicos.',
+      decision:
+        'Landing page componentizada em React com tipagem em TypeScript: apresentação institucional, divulgação de modalidades, exibição de planos e destaque de benefícios, com chamadas para ação distribuídas ao longo da página.',
+      result:
+        'Interface moderna e responsiva, com alta performance via Vite e ícones Lucide React, alinhada ao universo fitness. Estrutura componentizada e replicável para outros projetos de academias e estúdios.',
+    },
+    en: {
+      title: 'Apex Academy — Landing Page',
+      tagline: 'Modern gym landing page focused on brand presentation and lead generation for new members',
+      problem:
+        'The gym needed a page that communicated brand identity, clearly presented class types and membership plans, and converted visitors into new members through strategic CTAs.',
+      decision:
+        'Component-based React landing page with TypeScript typing: institutional presentation, class/modality showcase, plan display, and benefit highlights, with calls-to-action distributed throughout the page.',
+      result:
+        'Modern, responsive interface with high performance via Vite and Lucide React icons, aligned with the fitness universe. Componentized, replicable structure for other gym and studio projects.',
+    },
+  },
+  {
+    id: 'mei-finance',
+    image: mei_finance,
+    liveUrl: 'https://mei-finance-frontend.vercel.app/',
+    status: 'production',
+    tech: ['React', 'TypeScript', 'TanStack Router', 'shadcn/ui', 'Zod', 'Node.js'],
+    terminal: [
+      '$ mei-finance --status',
+      '→ receita_acumulada: R$ 54.320,00',
+      '→ limite_mei: R$ 81.000,00',
+      '→ percentual: 67.1%  ⚠ alerta ativo > 70%',
+      '→ meses_restantes: 4',
+    ],
+    pt: {
+      title: 'MEI Finance',
+      tagline: 'Controle financeiro pensado para o microempreendedor brasileiro',
+      problem: 'Microempreendedores gerenciam finanças em cadernos ou planilhas e não sabem quando estão se aproximando do limite anual do MEI (R$ 81mil) — o que pode resultar em desenquadramento tributário inesperado.',
+      decision: 'Construí um sistema com autenticação JWT, categorização de transações, dashboard de fluxo de caixa e alerta proativo que calcula em tempo real o percentual do limite MEI consumido.',
+      result: 'Solução pronta para SaaS B2C. Arquitetura modular com TanStack Router e code splitting automático, permitindo onboarding de novos microempreendedores sem atrito.',
+    },
+    en: {
+      title: 'MEI Finance',
+      tagline: 'Financial control built for the Brazilian solo entrepreneur',
+      problem: 'Solo entrepreneurs track finances in notebooks and don\'t know when they\'re approaching the annual MEI revenue cap (BRL 81k) — risking unexpected tax reclassification.',
+      decision: 'Built a system with JWT auth, transaction categorization, cash flow dashboard and a proactive alert that calculates in real time the percentage of the MEI cap consumed.',
+      result: 'Production-ready B2C SaaS architecture. Modular TanStack Router setup with automatic code splitting, enabling frictionless onboarding.',
+    },
+  },
+  {
+    id: 'chat2order',
+    image: chat2order,
+    liveUrl: 'https://chat2order-frontend.vercel.app/',
+    status: 'production',
+    tech: ['React', 'Node.js', 'TypeScript', 'PostgreSQL', 'Docker', 'OpenAI'],
+    terminal: [
+      '$ chat2order --incoming "2 x-salada s/ cebola e suco laranja"',
+      '→ llm.extract() ... [128ms]',
+      '→ { items: [{name:"x-salada",qty:2,obs:"sem cebola"},{name:"suco",qty:1}] }',
+      '→ order.persist() ... OK',
+      '→ dashboard.push() ... LIVE ✓',
+    ],
+    pt: {
+      title: 'Chat2Order',
+      tagline: 'IA que transforma texto livre do WhatsApp em pedido estruturado',
+      problem: 'Restaurantes perdiam pedidos porque clientes escrevem de formas imprevisíveis no WhatsApp — "quero 2 x-salada sem cebola e um suco de laranja grande" virava um pesadelo manual.',
+      decision: 'Integrei a API da OpenAI com schema de extração estruturada: o modelo retorna sempre um JSON com itens, quantidades e observações — sem pós-processamento de regex. Pipeline: WhatsApp → webhook → LLM → banco → painel em tempo real.',
+      result: 'Zero pedidos perdidos por interpretação manual. O operador vê o pedido estruturado em menos de 2s após o cliente enviar. Sistema em uso real por estabelecimentos parceiros.',
+    },
+    en: {
+      title: 'Chat2Order',
+      tagline: 'AI that turns WhatsApp free text into structured orders',
+      problem: 'Restaurants lost orders because customers write in unpredictable ways on WhatsApp. Parsing "2 burgers no onion and a large OJ" manually was a nightmare.',
+      decision: 'Integrated OpenAI API with structured extraction schema: model always returns JSON with items, quantities and notes — no regex post-processing. Pipeline: WhatsApp → webhook → LLM → DB → real-time dashboard.',
+      result: 'Zero orders lost to manual interpretation. Operator sees structured order in under 2s after customer sends. System in real use by partner establishments.',
     },
   },
 ]
