@@ -1,4 +1,4 @@
-import Hero from '../components/Hero'
+import Hero from '../sections/Hero'
 import StatsBar from '../components/StatsBar'
 import Work from '../components/Work'
 import StackSection from '../components/StackSection'

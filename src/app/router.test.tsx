@@ -13,7 +13,7 @@ describe('rotas', () => {
   it('renderiza a home em /', async () => {
     renderAt('/')
     expect(await screen.findByRole('main')).toBeInTheDocument()
-    expect(screen.getByText('César Danilo', { selector: 'h1' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: /Produtos web completos/ })).toBeInTheDocument()
   })
 
   it('renderiza a página do case em /cases/:slug', async () => {

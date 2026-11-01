@@ -4,6 +4,7 @@
 @import "@fontsource/jetbrains-mono/500.css";
 @import "./styles/tokens.css";
 @import "./styles/base.css";
+@import "./styles/hero.css";
 
 /* Variáveis legadas abaixo: usadas pelas seções atuais até cada uma ser migrada (fases 3–7). */
 
@@ -22,9 +23,6 @@
   --whatsapp: #25D366;
   --whatsapp-dark: #1DA851;
 
-  --font-display: 'Inter Tight', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
 
   --radius: 8px;
   --radius-lg: 12px;
