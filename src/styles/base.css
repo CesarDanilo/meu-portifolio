@@ -1,0 +1,87 @@
+/* Base do layout novo. Convive com o CSS legado em index.css até a fase 7. */
+
+@utility wrap {
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  @media (width >= 900px) {
+    padding-left: max(48px, env(safe-area-inset-left, 0px));
+    padding-right: max(48px, env(safe-area-inset-right, 0px));
+  }
+}
+
+/* Rótulos técnicos (índices, metadados, tags) */
+@utility meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Palavra de impacto: Archivo condensada */
+@utility condensed {
+  font-stretch: 62%;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+  }
+}
+
+/* Revelação ao rolar (componente Reveal). Sem JS ou com movimento reduzido, o conteúdo fica visível. */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 1s var(--ease-out-soft), transform 1s var(--ease-out-soft);
+  transition-delay: calc(var(--reveal-i, 0) * 90ms);
+}
+.reveal-mask {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.1s var(--ease-mask);
+  transition-delay: calc(var(--reveal-i, 0) * 90ms);
+}
+.is-revealed .reveal-up,
+.reveal-up.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+.is-revealed .reveal-mask {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Linha de progresso da página sob a barra */
+.scroll-progress {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      animation: scroll-progress linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+@keyframes scroll-progress {
+  to { transform: scaleX(1); }
+}
+
+@keyframes status-ping {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-signal) 60%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 8px transparent; }
+}
+.status-dot {
+  animation: status-ping 2.4s var(--ease-out-soft) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up, .reveal-mask { opacity: 1; transform: none; clip-path: none; transition: none; }
+  .status-dot { animation: none; }
+}
