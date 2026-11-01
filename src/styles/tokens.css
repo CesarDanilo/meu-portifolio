@@ -1,0 +1,21 @@
+/*
+ * Design tokens da direção "ficha técnica editorial" (docs/portfolio-redesign/03-design-decisions.md).
+ * Viram utilitários do Tailwind: bg-bg, bg-plate, border-line, text-fg-2, text-signal, font-display...
+ */
+@theme {
+  --color-bg: #0a0a0a;
+  --color-plate: #111110;
+  --color-line: #1e1d1c;
+  --color-line-2: #2e2c2a;
+  --color-fg: #edebe8;
+  --color-fg-2: #a39f9a;
+  --color-fg-3: #85817c;
+  --color-signal: #e3141b;
+
+  --font-display: 'Archivo Variable', 'Arial Narrow', Arial, sans-serif;
+  --font-body: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.1, 1);
+  --ease-mask: cubic-bezier(0.7, 0, 0.2, 1);
+}
