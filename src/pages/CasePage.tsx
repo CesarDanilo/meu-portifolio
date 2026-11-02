@@ -61,7 +61,7 @@ export default function CasePage() {
           <ol className="flex flex-wrap items-center gap-2 font-mono text-xs" aria-label="Fluxo da arquitetura">
             {item.flow.map((step, i) => (
               <li key={step} className="flex items-center gap-2">
-                {i > 0 && <span className="text-signal" aria-hidden="true">→</span>}
+                {i > 0 && <span className="text-signal-text" aria-hidden="true">→</span>}
                 <span className="border border-line-2 bg-plate px-3 py-2 text-fg">{step}</span>
               </li>
             ))}
@@ -70,7 +70,7 @@ export default function CasePage() {
         <Block label="Desafios técnicos">
           <ul className="flex flex-col gap-3">
             {item.challenges.map(c => (
-              <li key={c.title} className="relative pl-5 before:absolute before:left-0 before:font-mono before:text-signal before:content-['+']">
+              <li key={c.title} className="relative pl-5 before:absolute before:left-0 before:font-mono before:text-signal-text before:content-['+']">
                 <strong className="font-medium text-fg">{c.title}:</strong> {c.body}
               </li>
             ))}
@@ -86,7 +86,7 @@ export default function CasePage() {
       >
         <div>
           <span className="meta text-fg-3">Próximo case</span>
-          <h2 className="text-[clamp(32px,5vw,72px)] font-semibold leading-none tracking-[-0.04em] transition-colors group-hover:text-signal">{next.name}</h2>
+          <h2 className="text-[clamp(32px,5vw,72px)] font-semibold leading-none tracking-[-0.04em] transition-colors group-hover:text-signal-text">{next.name}</h2>
         </div>
         <span className="meta text-fg-3">{String(((index + 1) % cases.length) + 1).padStart(2, '0')} →</span>
       </Link>

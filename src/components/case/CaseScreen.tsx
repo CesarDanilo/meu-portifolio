@@ -55,7 +55,7 @@ export default function CaseScreen({ item, chrome = false, sizes, className, pri
             {media.lines.map((line, l) => (
               <span
                 key={l}
-                className={cn('block', line.startsWith('$') ? 'text-fg' : l === media.lines.length - 1 ? 'text-signal' : 'text-fg-3')}
+                className={cn('block', line.startsWith('$') ? 'text-fg' : l === media.lines.length - 1 ? 'text-signal-text' : 'text-fg-3')}
                 style={{ '--l': l } as CSSProperties}
               >
                 {line}

@@ -22,7 +22,7 @@ export default function Timeline({ jobs, now = today() }: { jobs: Job[]; now?: T
   const pct = (v: number) => `${((v - start) / span) * 100}%`
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Linha do tempo da experiência">
       <div ref={ref} aria-hidden="true" className={cn('timeline relative min-w-[560px] pt-[22px]', lit && 'is-lit')}>
         <div className="absolute inset-0 grid" style={{ gridTemplateColumns: `repeat(${years.length}, 1fr)` }}>
           {years.map(y => (

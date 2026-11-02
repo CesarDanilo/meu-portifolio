@@ -7,37 +7,19 @@
 @import "./styles/hero.css";
 @import "./styles/about.css";
 @import "./styles/cases.css";
+@import "./styles/stack.css";
 
-/* Variáveis legadas abaixo: usadas pelas seções atuais até cada uma ser migrada (fases 3–7). */
-
-:root {
-  --bg: #0B0E14;
-  --surface: #11151D;
-  --surface-2: #161B25;
-  --border: #1E2530;
-  --border-2: #252D3D;
-  --text-primary: #E8EAED;
-  --text-muted: #8B93A1;
-  --text-faint: #4A5568;
-  --accent: #5EEAD4;
-  --accent-dim: rgba(94, 234, 212, 0.08);
-  --accent-glow: rgba(94, 234, 212, 0.15);
-  --whatsapp: #25D366;
-  --whatsapp-dark: #1DA851;
-
-
-  --radius: 8px;
-  --radius-lg: 12px;
+html {
+  background: var(--color-bg);
+  color-scheme: dark;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
-
-*, *::before, *::after { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   margin: 0;
-  background-color: var(--bg);
-  color: var(--text-primary);
+  background: var(--color-bg);
+  color: var(--color-fg);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
@@ -45,29 +27,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-
-::selection { background: var(--accent); color: var(--bg); }
-
-.container {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px;
+::selection {
+  background: var(--color-signal);
+  color: #fff;
 }
 
-@media (min-width: 768px) { .container { padding: 0 48px; } }
-
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes pulse-whatsapp { 0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); } }
-
-.cursor-blink { animation: blink 1s step-end infinite; }
-.fade-up { animation: fadeUp 0.6s ease forwards; }
-
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
 @media (prefers-reduced-motion: reduce) {
-  /* Só as classes legadas: um seletor global com !important anulava estados legítimos (ex.: a 2ª foto do Sobre). */
-  .reveal, .fade-up, .cursor-blink { animation: none; transition: none; opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
 }

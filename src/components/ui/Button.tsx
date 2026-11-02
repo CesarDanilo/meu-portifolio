@@ -33,7 +33,7 @@ export default function ButtonLink({ href, children, icon, variant = 'ghost', si
           'grid place-items-center rounded-full transition-[transform,background-color,color] duration-500 ease-out-soft [&>svg]:size-[15px]',
           size === 'lg' ? 'size-[42px]' : 'size-[34px]',
           variant === 'solid'
-            ? 'bg-signal text-white group-hover:bg-white group-hover:text-signal'
+            ? 'bg-signal text-white group-hover:bg-white group-hover:text-signal-text'
             : 'bg-plate group-hover:-rotate-12 group-hover:bg-signal group-hover:text-white',
         )}
       >

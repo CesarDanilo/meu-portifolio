@@ -2,10 +2,11 @@ import Hero from '../sections/Hero'
 import About from '../sections/About'
 import Experience from '../sections/Experience'
 import Cases from '../sections/Cases'
-import StackSection from '../components/StackSection'
-import Contact from '../components/Contact'
+import OtherProjects from '../sections/OtherProjects'
+import Stack from '../sections/Stack'
+import Contact from '../sections/Contact'
 
-// Ordem aprovada (D-07). StackSection e Contact ainda são as versões antigas (fase 7).
+// Ordem aprovada (D-07): Sobre → Experiência → Cases → Outros → Stack → Contato.
 export default function HomePage() {
   return (
     <main>
@@ -13,7 +14,8 @@ export default function HomePage() {
       <About />
       <Experience />
       <Cases />
-      <StackSection />
+      <OtherProjects />
+      <Stack />
       <Contact />
     </main>
   )

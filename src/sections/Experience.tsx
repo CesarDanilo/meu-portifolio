@@ -14,7 +14,7 @@ function Duration({ role }: { role: Pick<Role, 'from' | 'to'> & { track?: Role['
     <em
       className={cn(
         'meta self-start border px-2 py-1 not-italic transition-colors duration-300',
-        role.track === 'dev' || !role.track ? 'border-signal text-signal group-hover:bg-signal group-hover:text-white' : 'border-line-2 text-fg-3',
+        role.track === 'dev' || !role.track ? 'border-signal text-signal-text group-hover:bg-signal group-hover:text-white' : 'border-line-2 text-fg-3',
       )}
     >
       {formatDuration(monthsInPeriod(role, NOW))}
@@ -87,7 +87,7 @@ export default function Experience() {
                           <h4 className="text-[clamp(18px,1.8vw,22px)] font-semibold leading-tight tracking-[-0.02em] transition-transform duration-500 ease-out-soft group-hover:translate-x-1.5">{role.title}</h4>
                           <p className="mt-2 max-w-[62ch] text-fg-2">{role.description}</p>
                         </div>
-                        <span className={cn('meta self-start text-[10px]', role.track === 'dev' ? 'text-signal' : 'text-fg-3')}>{badge(role)}</span>
+                        <span className={cn('meta self-start text-[10px]', role.track === 'dev' ? 'text-signal-text' : 'text-fg-3')}>{badge(role)}</span>
                       </div>
                     ))}
                   </div>
@@ -99,7 +99,7 @@ export default function Experience() {
 
         <Reveal className="mt-16">
           <div className="grid gap-6 lg:grid-cols-12">
-          <span className="meta pt-1.5 text-signal lg:col-span-3">Formação</span>
+          <span className="meta pt-1.5 text-signal-text lg:col-span-3">Formação</span>
           <div className="grid gap-8 border-t border-line pt-6 lg:col-span-9 lg:grid-cols-[200px_1fr]">
             <div className="flex flex-col gap-2">
               <Dates from={education.from} to={education.to} />

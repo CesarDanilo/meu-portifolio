@@ -1,0 +1,47 @@
+/* Ícones da stack: quatro cantos vermelhos que crescem até quase fechar a borda no hover. */
+@property --c {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 9px;
+}
+
+.tool-ico {
+  --c: 9px;
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: var(--color-fg);
+  background:
+    linear-gradient(var(--color-signal), var(--color-signal)) top left / var(--c) 1px no-repeat,
+    linear-gradient(var(--color-signal), var(--color-signal)) top left / 1px var(--c) no-repeat,
+    linear-gradient(var(--color-signal), var(--color-signal)) top right / var(--c) 1px no-repeat,
+    linear-gradient(var(--color-signal), var(--color-signal)) top right / 1px var(--c) no-repeat,
+    linear-gradient(var(--color-signal), var(--color-signal)) bottom left / var(--c) 1px no-repeat,
+    linear-gradient(var(--color-signal), var(--color-signal)) bottom left / 1px var(--c) no-repeat,
+    linear-gradient(var(--color-signal), var(--color-signal)) bottom right / var(--c) 1px no-repeat,
+    linear-gradient(var(--color-signal), var(--color-signal)) bottom right / 1px var(--c) no-repeat;
+  transition: --c 0.5s var(--ease-out-soft), background-color 0.4s;
+}
+
+.tool-ico svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.5s var(--ease-out-soft);
+}
+
+.tool-item:hover .tool-ico,
+.tool-item:focus-within .tool-ico {
+  --c: 22px;
+  background-color: color-mix(in srgb, var(--color-signal) 8%, transparent);
+}
+
+.tool-item:hover .tool-ico svg {
+  transform: translateY(-2px) scale(1.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-ico, .tool-ico svg { transition: none; }
+}

@@ -1,6 +1,6 @@
 /*
  * Design tokens da direção "ficha técnica editorial" (docs/portfolio-redesign/03-design-decisions.md).
- * Viram utilitários do Tailwind: bg-bg, bg-plate, border-line, text-fg-2, text-signal, font-display...
+ * Viram utilitários do Tailwind: bg-bg, bg-plate, border-line, text-fg-2, text-signal-text, font-display...
  */
 @theme {
   --color-bg: #0a0a0a;
@@ -11,6 +11,8 @@
   --color-fg-2: #a39f9a;
   --color-fg-3: #85817c;
   --color-signal: #e3141b;
+  /* Vermelho para texto pequeno: 6,8:1 sobre o fundo (o --color-signal fica em 3,7:1). */
+  --color-signal-text: #ff6267;
 
   --font-display: 'Archivo Variable', 'Arial Narrow', Arial, sans-serif;
   --font-body: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;

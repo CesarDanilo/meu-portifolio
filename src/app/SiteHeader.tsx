@@ -30,7 +30,7 @@ export default function SiteHeader() {
       <header className="sticky top-[env(safe-area-inset-top,0px)] z-50 border-b border-line bg-bg/90 backdrop-blur-md">
         <div className="wrap flex h-14 items-center justify-between gap-4">
           <Link to="/" className="font-mono text-[13px] font-medium">
-            CD<span className="text-signal">/</span>
+            CD<span className="text-signal-text">/</span>
             <span className="sr-only"> César Danilo, início</span>
           </Link>
 
@@ -78,9 +78,9 @@ export default function SiteHeader() {
                 to="/"
                 hash={s.id}
                 onClick={() => setOpen(false)}
-                className="flex items-baseline gap-4 py-5 text-[clamp(32px,9vw,48px)] font-semibold tracking-[-0.03em] hover:text-signal"
+                className="flex items-baseline gap-4 py-5 text-[clamp(32px,9vw,48px)] font-semibold tracking-[-0.03em] hover:text-signal-text"
               >
-                <span className="meta text-signal">{pad(i)}</span>
+                <span className="meta text-signal-text">{pad(i)}</span>
                 {s.label}
               </Link>
             </li>

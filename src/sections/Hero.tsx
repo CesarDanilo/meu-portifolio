@@ -29,7 +29,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 items-end gap-x-6 lg:grid-cols-12">
           <div className="relative z-[2] order-2 flex min-w-0 flex-col gap-7 pb-10 pt-8 lg:order-1 lg:col-span-7 lg:pt-0">
             <span className="hero-in meta text-fg-3" style={delay(80)}>
-              {profile.name} <span className="text-signal">/</span> {profile.role}
+              {profile.name} <span className="text-signal-text">/</span> {profile.role}
             </span>
             <h1 id="hero-title" className="hero-in text-[clamp(40px,6vw,88px)] font-[560] leading-[0.98] tracking-[-0.045em] text-balance" style={delay(180)}>
               {headline.before} <b className="condensed">{headline.emphasis}</b>

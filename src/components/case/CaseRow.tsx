@@ -39,7 +39,7 @@ export default function CaseRow({ item, index }: CaseRowProps) {
       onFocus={() => toggle(true)}
       onBlur={() => toggle(false)}
     >
-      <span data-flip className="case-row__n self-start pt-1.5 font-mono text-[13px] text-fg-3 transition-colors group-[.is-open]:text-signal">
+      <span data-flip className="case-row__n self-start pt-1.5 font-mono text-[13px] text-fg-3 transition-colors group-[.is-open]:text-signal-text">
         {String(index + 1).padStart(2, '0')}
       </span>
 
@@ -57,11 +57,11 @@ export default function CaseRow({ item, index }: CaseRowProps) {
         <div className="case-open-only mt-2 flex flex-col gap-3.5">
           <ul className="flex flex-col gap-2 text-sm text-fg-2">
             {item.highlights.map(h => (
-              <li key={h} className="relative pl-5 before:absolute before:left-0 before:font-mono before:text-signal before:content-['+']">{h}</li>
+              <li key={h} className="relative pl-5 before:absolute before:left-0 before:font-mono before:text-signal-text before:content-['+']">{h}</li>
             ))}
           </ul>
           <span className="meta inline-flex gap-2.5 text-fg">
-            Abrir case <i className="not-italic text-signal transition-transform duration-400 group-hover:translate-x-1">→</i>
+            Abrir case <i className="not-italic text-signal-text transition-transform duration-400 group-hover:translate-x-1">→</i>
           </span>
         </div>
       </div>

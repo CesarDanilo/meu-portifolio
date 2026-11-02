@@ -32,7 +32,7 @@ export default function About() {
           <div className="flex min-w-0 flex-col gap-8 lg:col-span-6 lg:col-start-7">
             <Reveal variant="mask">
               <p className="text-[clamp(30px,3.6vw,52px)] font-medium leading-[1.05] tracking-[-0.035em] text-balance">
-                {statement.before} <b className="condensed text-signal">{statement.emphasis}</b>
+                {statement.before} <b className="condensed text-signal-text">{statement.emphasis}</b>
                 {statement.after}
               </p>
             </Reveal>
