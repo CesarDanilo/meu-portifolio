@@ -3,6 +3,9 @@ import AxeBuilder from '@axe-core/playwright'
 
 const paths = ['/', '/cases/chat2order', '/cases/catalog-service']
 
+// Contraste medido no estado final: com animação, o axe pega textos no meio do fade (semitransparentes) e falha de forma intermitente.
+test.use({ reducedMotion: 'reduce' })
+
 test.describe('acessibilidade', () => {
   for (const path of paths) {
     test(`${path} sem violações critical ou serious`, async ({ page }) => {

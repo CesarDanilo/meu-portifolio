@@ -24,7 +24,7 @@ export default function Reveal({ children, variant = 'up', index = 0, as: Tag = 
   const style = { '--reveal-i': index } as CSSProperties
 
   return (
-    <Tag ref={ref} className={cn(className, inView && 'is-revealed')} data-revealed={inView || undefined}>
+    <Tag ref={ref} className={cn(className, inView && 'is-revealed')} data-revealed={inView ? 'true' : undefined}>
       <div className={variant === 'mask' ? 'reveal-mask' : 'reveal-up'} style={style}>
         {children}
       </div>

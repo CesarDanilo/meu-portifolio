@@ -13,7 +13,7 @@ export default function Trail({ steps }: { steps: Profile['trail'] }) {
     <ol
       ref={ref}
       aria-label="Trajetória"
-      data-lit={lit || undefined}
+      data-lit={lit ? 'true' : undefined}
       className={cn('trail relative mt-18 grid gap-6 pl-8 lg:grid-cols-8 lg:gap-0 lg:pl-0', lit && 'is-lit')}
     >
       <span className="absolute bottom-0 left-[7px] top-0 w-px bg-line-2 lg:inset-x-0 lg:bottom-auto lg:top-[7px] lg:h-px lg:w-auto" aria-hidden="true" />
