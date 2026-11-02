@@ -26,6 +26,14 @@ try {
   await phone.getByRole('button', { name: 'Menu' }).click()
   await phone.waitForTimeout(300)
   await phone.screenshot({ path: `${out}/mobile-menu.png` })
+
+  // Página inteira com movimento reduzido: tudo visível de uma vez, sem esperar a rolagem.
+  for (const [name, opts] of [['desktop-pagina', { viewport: { width: 1440, height: 900 } }], ['mobile-pagina', devices['Pixel 7']]]) {
+    const page = await browser.newPage({ ...opts, reducedMotion: 'reduce' })
+    await page.goto(base)
+    await page.waitForTimeout(800)
+    await page.screenshot({ path: `${out}/${name}.png`, fullPage: true })
+  }
 } finally {
   await browser.close()
   server.kill()

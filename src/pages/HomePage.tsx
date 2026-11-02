@@ -1,19 +1,19 @@
 import Hero from '../sections/Hero'
-import StatsBar from '../components/StatsBar'
+import About from '../sections/About'
+import Experience from '../sections/Experience'
 import Work from '../components/Work'
 import StackSection from '../components/StackSection'
-import About from '../components/About'
 import Contact from '../components/Contact'
 
-// Composição atual da home. Cada seção será trocada pela versão nova nas fases 3–7.
+// Ordem aprovada (D-07). Work, StackSection e Contact ainda são as versões antigas (fases 6 e 7).
 export default function HomePage() {
   return (
     <main>
       <Hero />
-      <StatsBar />
+      <About />
+      <Experience />
       <Work />
       <StackSection />
-      <About />
       <Contact />
     </main>
   )

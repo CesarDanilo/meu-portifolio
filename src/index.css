@@ -5,6 +5,7 @@
 @import "./styles/tokens.css";
 @import "./styles/base.css";
 @import "./styles/hero.css";
+@import "./styles/about.css";
 
 /* Variáveis legadas abaixo: usadas pelas seções atuais até cada uma ser migrada (fases 3–7). */
 
@@ -66,5 +67,6 @@ body {
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 @media (prefers-reduced-motion: reduce) {
-  *, .reveal, .fade-up { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+  /* Só as classes legadas: um seletor global com !important anulava estados legítimos (ex.: a 2ª foto do Sobre). */
+  .reveal, .fade-up, .cursor-blink { animation: none; transition: none; opacity: 1; transform: none; }
 }
