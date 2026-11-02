@@ -20,6 +20,7 @@ test('rolando a página inteira, todo bloco com revelação termina visível', a
 test('trilha do Sobre e linha do tempo acendem ao entrar na tela', async ({ page }) => {
   await page.goto('/#sobre')
   const trail = page.getByRole('list', { name: 'Trajetória' })
-  await trail.scrollIntoViewIfNeeded()
+  // centraliza: rolar só "se necessário" deixa a trilha colada na borda de baixo, fora da margem do observador
+  await trail.evaluate(el => el.scrollIntoView({ block: 'center' }))
   await expect(trail).toHaveAttribute('data-lit', 'true')
 })

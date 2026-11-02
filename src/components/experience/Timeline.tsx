@@ -10,7 +10,7 @@ const idx = ([y, m]: readonly [number, number]) => y * 12 + (m - 1)
 /** Linha do tempo (gantt) com uma barra por função; o eixo cobre os anos das funções. */
 export default function Timeline({ jobs, now = today() }: { jobs: Job[]; now?: Today }) {
   const reduced = useReducedMotion()
-  const [ref, lit] = useInView<HTMLDivElement>({ skip: reduced, threshold: 0.35 })
+  const [ref, lit] = useInView<HTMLDivElement>({ skip: reduced, threshold: 0.2 })
 
   const roles = jobs.flatMap(j => j.roles.map(r => ({ ...r, company: j.company })))
   const end = (r: (typeof roles)[number]) => idx(r.to ?? [now.year, now.month])

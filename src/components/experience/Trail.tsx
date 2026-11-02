@@ -7,7 +7,7 @@ import { cn } from '../../lib/cn'
 /** Trilha da trajetória: horizontal no desktop, vertical no celular. Acende ao entrar na tela. */
 export default function Trail({ steps }: { steps: Profile['trail'] }) {
   const reduced = useReducedMotion()
-  const [ref, lit] = useInView<HTMLOListElement>({ skip: reduced, threshold: 0.35 })
+  const [ref, lit] = useInView<HTMLOListElement>({ skip: reduced, threshold: 0.2 })
 
   return (
     <ol
