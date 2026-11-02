@@ -60,7 +60,7 @@ export default function Hero() {
               </figure>
             </div>
             <div
-              className="hero-word absolute inset-x-0 z-[3] text-center text-[21vw] max-lg:bottom-0 max-lg:translate-y-[18%] lg:-bottom-[0.12em] lg:z-[1] lg:text-[clamp(110px,25vw,420px)]"
+              className="hero-word absolute inset-x-0 z-[3] text-center text-[21vw] max-lg:bottom-0 max-lg:translate-y-[18%] lg:-bottom-[0.12em] lg:z-[1] lg:text-[min(20.5vw,300px)]"
               aria-hidden="true"
             >
               {WORD}
