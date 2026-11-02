@@ -16,7 +16,7 @@ test.describe('smoke', () => {
 
   test('rota de case abre direto pela URL (rewrite da SPA)', async ({ page }) => {
     await page.goto('/cases/chat2order')
-    await expect(page.getByTestId('case-title')).toHaveText('chat2order')
+    await expect(page.getByTestId('case-title')).toHaveText('Chat2Order')
   })
 
   test('rota inexistente mostra 404', async ({ page }) => {

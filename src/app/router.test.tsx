@@ -18,7 +18,7 @@ describe('rotas', () => {
 
   it('renderiza a página do case em /cases/:slug', async () => {
     renderAt('/cases/chat2order')
-    expect(await screen.findByTestId('case-title')).toHaveTextContent('chat2order')
+    expect(await screen.findByTestId('case-title')).toHaveTextContent('Chat2Order')
   })
 
   it('mostra a página 404 para rotas desconhecidas', async () => {

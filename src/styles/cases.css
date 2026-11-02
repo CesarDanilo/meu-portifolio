@@ -1,0 +1,78 @@
+/* Fichas de case (home) e tela "vídeo". Aberta = hover/foco no desktop; no celular a ficha já nasce aberta. */
+
+.case-row {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 4fr) minmax(0, 3fr) minmax(0, 4fr);
+  grid-template-areas: "n title details screen";
+  column-gap: 24px;
+  align-items: center;
+  padding-block: 28px;
+}
+.case-row.is-open {
+  grid-template-columns: 80px minmax(0, 4fr) minmax(0, 7fr);
+  grid-template-areas: "n title screen" "n details screen";
+  grid-template-rows: auto 1fr;
+  align-items: start;
+  row-gap: 28px;
+  padding-block: 44px;
+}
+.case-row__n { grid-area: n; }
+.case-row__title { grid-area: title; }
+.case-row__details { grid-area: details; }
+.case-row__screen { grid-area: screen; }
+.case-row::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -1px;
+  height: 1px; width: 0;
+  background: var(--color-signal);
+  transition: width 0.7s var(--ease-out-soft);
+}
+.case-row.is-open::after { width: 100%; }
+
+@media (width < 1024px) {
+  .case-row, .case-row.is-open {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "n" "title" "details" "screen";
+    grid-template-rows: none;
+    row-gap: 14px;
+    padding-block: 28px;
+  }
+}
+
+/* Partes que só aparecem com a ficha aberta */
+.case-row:not(.is-open) .case-open-only { display: none; }
+
+/* Tela: navegador + "vídeo" (tour pelo screenshot) + player */
+.screen-view img { transform-origin: 30% 20%; }
+/* Na lista, a tela fica dessaturada até a ficha abrir; na página do case, cor total. */
+.case-row .screen-view img { filter: grayscale(0.85) brightness(0.85); transition: filter 0.6s; }
+.case-row.is-open .screen-view img { filter: none; }
+.screen-terminal { background: #070707; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .is-open .screen-view img { animation: case-tour 12s ease-in-out 0.3s infinite; }
+  .is-open .screen-cursor { animation: case-pointer 12s ease-in-out 0.3s infinite; }
+  .is-open .screen-progress { animation: case-progress 12s linear 0.3s infinite; }
+  .is-open .screen-terminal span { animation: case-line 0.5s var(--ease-out-soft) both; animation-delay: calc(var(--l, 0) * 250ms); }
+}
+@keyframes case-tour {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.35) translate(-4%, -2%); }
+  55% { transform: scale(1.35) translate(-22%, -18%); }
+  80% { transform: scale(1.12) translate(-6%, -10%); }
+  100% { transform: scale(1); }
+}
+@keyframes case-pointer {
+  0% { left: 30%; top: 40%; }
+  25% { left: 22%; top: 30%; }
+  30% { transform: scale(0.7); }
+  33% { transform: scale(1); }
+  55% { left: 62%; top: 58%; }
+  60% { transform: scale(0.7); }
+  63% { transform: scale(1); }
+  80% { left: 48%; top: 46%; }
+  100% { left: 30%; top: 40%; }
+}
+@keyframes case-progress { from { width: 0; } to { width: 100%; } }
+@keyframes case-line { from { opacity: 0.001; transform: translateY(8px); } }
