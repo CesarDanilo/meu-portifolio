@@ -1,78 +1,106 @@
-/* Fichas de case (home) e tela "vídeo". Aberta = hover/foco no desktop; no celular a ficha já nasce aberta. */
+/*
+ * Fichas de case. O hover não muda layout nem altura: só opacidade e transform,
+ * que o navegador anima na GPU. (A versão anterior animava a altura da linha e
+ * reorganizava o grid, o que recalculava a página inteira a cada quadro.)
+ */
 
 .case-row {
   display: grid;
   grid-template-columns: 80px minmax(0, 4fr) minmax(0, 3fr) minmax(0, 4fr);
-  grid-template-areas: "n title details screen";
   column-gap: 24px;
   align-items: center;
-  padding-block: 28px;
+  padding-block: 32px;
 }
-.case-row.is-open {
-  grid-template-columns: 80px minmax(0, 4fr) minmax(0, 7fr);
-  grid-template-areas: "n title screen" "n details screen";
-  grid-template-rows: auto 1fr;
-  align-items: start;
-  row-gap: 28px;
-  padding-block: 44px;
-}
-.case-row__n { grid-area: n; }
-.case-row__title { grid-area: title; }
-.case-row__details { grid-area: details; }
-.case-row__screen { grid-area: screen; }
 .case-row::after {
   content: "";
   position: absolute;
-  left: 0; bottom: -1px;
-  height: 1px; width: 0;
+  left: 0;
+  bottom: -1px;
+  height: 1px;
+  width: 100%;
   background: var(--color-signal);
-  transition: width 0.7s var(--ease-out-soft);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s var(--ease-out-soft);
 }
-.case-row.is-open::after { width: 100%; }
+
+/* Detalhes: resumo e destaques ocupam a mesma célula e trocam por opacidade. */
+.case-row__details { display: grid; }
+.case-row__summary,
+.case-row__more {
+  grid-area: 1 / 1;
+  transition: opacity 0.45s var(--ease-out-soft), transform 0.6s var(--ease-out-soft);
+}
+.case-row__more { opacity: 0; transform: translateY(14px); }
+
+.case-row__name { transition: transform 0.6s var(--ease-out-soft); }
+.case-row__n { transition: color 0.4s; }
+
+/* Tela: cresce um pouco e acende; sobreposições aparecem por opacidade. */
+.case-row__screen {
+  transform-origin: 100% 50%;
+  transition: transform 0.7s var(--ease-out-soft);
+}
+.screen-shade {
+  background: rgb(10 10 10 / 0.45);
+  transition: opacity 0.5s var(--ease-out-soft);
+}
+.screen-hover-only {
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-soft);
+}
+
+/* Estado ativo: hover ou foco por teclado, só onde existe mouse e tela larga. */
+@media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+  .case-row:hover::after,
+  .case-row:focus-visible::after { transform: scaleX(1); }
+  .case-row:hover .case-row__summary,
+  .case-row:focus-visible .case-row__summary { opacity: 0; transform: translateY(-14px); }
+  .case-row:hover .case-row__more,
+  .case-row:focus-visible .case-row__more { opacity: 1; transform: none; }
+  .case-row:hover .case-row__name,
+  .case-row:focus-visible .case-row__name { transform: translateX(8px); }
+  .case-row:hover .case-row__n,
+  .case-row:focus-visible .case-row__n { color: var(--color-signal-text); }
+  .case-row:hover .case-row__screen,
+  .case-row:focus-visible .case-row__screen { transform: scale(1.04); }
+  .case-row:hover .screen-shade,
+  .case-row:focus-visible .screen-shade { opacity: 0; }
+  .case-row:hover .screen-hover-only,
+  .case-row:focus-visible .screen-hover-only { opacity: 1; }
+}
+
+/* Celular e tablet: sem hover, tudo visível e empilhado, tela já acesa. */
+@media not ((hover: hover) and (pointer: fine) and (min-width: 1024px)) {
+  .case-row__more { opacity: 1; transform: none; }
+  .case-row__summary, .case-row__more { grid-area: auto; }
+  .case-row__details { gap: 14px; }
+  .screen-shade { opacity: 0; }
+}
 
 @media (width < 1024px) {
-  .case-row, .case-row.is-open {
+  .case-row {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "n" "title" "details" "screen";
-    grid-template-rows: none;
     row-gap: 14px;
     padding-block: 28px;
   }
 }
 
-/* Partes que só aparecem com a ficha aberta */
-.case-row:not(.is-open) .case-open-only { display: none; }
-
-/* Tela: navegador + "vídeo" (tour pelo screenshot) + player */
-.screen-view img { transform-origin: 30% 20%; }
-/* Na lista, a tela fica dessaturada até a ficha abrir; na página do case, cor total. */
-.case-row .screen-view img { filter: grayscale(0.85) brightness(0.85); transition: filter 0.6s; }
-.case-row.is-open .screen-view img { filter: none; }
-.screen-terminal { background: #070707; }
-
+/* Cursor e progresso rodam sempre (só transform), mas ficam invisíveis fora do hover: sem saltos ao sair. */
 @media (prefers-reduced-motion: no-preference) {
-  .is-open .screen-view img { animation: case-tour 12s ease-in-out 0.3s infinite; }
-  .is-open .screen-cursor { animation: case-pointer 12s ease-in-out 0.3s infinite; }
-  .is-open .screen-progress { animation: case-progress 12s linear 0.3s infinite; }
-  .is-open .screen-terminal span { animation: case-line 0.5s var(--ease-out-soft) both; animation-delay: calc(var(--l, 0) * 250ms); }
-}
-@keyframes case-tour {
-  0% { transform: scale(1); }
-  30% { transform: scale(1.35) translate(-4%, -2%); }
-  55% { transform: scale(1.35) translate(-22%, -18%); }
-  80% { transform: scale(1.12) translate(-6%, -10%); }
-  100% { transform: scale(1); }
+  .screen-cursor { animation: case-pointer 12s ease-in-out infinite; }
+  .screen-progress { animation: case-progress 12s linear infinite; }
+  .case-row:hover .screen-terminal span { animation: case-line 0.5s var(--ease-out-soft) both; animation-delay: calc(var(--l, 0) * 250ms); }
 }
 @keyframes case-pointer {
-  0% { left: 30%; top: 40%; }
-  25% { left: 22%; top: 30%; }
-  30% { transform: scale(0.7); }
-  33% { transform: scale(1); }
-  55% { left: 62%; top: 58%; }
-  60% { transform: scale(0.7); }
-  63% { transform: scale(1); }
-  80% { left: 48%; top: 46%; }
-  100% { left: 30%; top: 40%; }
+  0%, 100% { transform: translate(30%, 40%); }
+  25% { transform: translate(22%, 30%); }
+  55% { transform: translate(62%, 58%); }
+  80% { transform: translate(48%, 46%); }
 }
-@keyframes case-progress { from { width: 0; } to { width: 100%; } }
+@keyframes case-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes case-line { from { opacity: 0.001; transform: translateY(8px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .case-row::after, .case-row__summary, .case-row__more, .case-row__name, .case-row__screen, .screen-shade, .screen-hover-only { transition: none; }
+}
