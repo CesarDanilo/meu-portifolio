@@ -1,15 +1,16 @@
 /*
- * Fichas de case. O hover não muda layout nem altura: só opacidade e transform,
- * que o navegador anima na GPU. (A versão anterior animava a altura da linha e
- * reorganizava o grid, o que recalculava a página inteira a cada quadro.)
+ * Fichas de case: o efeito do protótipo (detalhes descem para baixo do título e a tela cresce),
+ * feito só com transform e opacidade. As posições são medidas uma vez no hover (CaseRow) e
+ * passadas em --dx, --dy e --s; o navegador anima na GPU, sem recalcular o layout a cada quadro.
  */
 
 .case-row {
+  position: relative;
   display: grid;
   grid-template-columns: 80px minmax(0, 4fr) minmax(0, 3fr) minmax(0, 4fr);
   column-gap: 24px;
-  align-items: center;
-  padding-block: 32px;
+  align-items: start;
+  padding-block: 56px;
 }
 .case-row::after {
   content: "";
@@ -24,22 +25,25 @@
   transition: transform 0.7s var(--ease-out-soft);
 }
 
-/* Detalhes: resumo e destaques ocupam a mesma célula e trocam por opacidade. */
-.case-row__details { display: grid; }
-.case-row__summary,
-.case-row__more {
-  grid-area: 1 / 1;
-  transition: opacity 0.45s var(--ease-out-soft), transform 0.6s var(--ease-out-soft);
-}
-.case-row__more { opacity: 0; transform: translateY(14px); }
-
-.case-row__name { transition: transform 0.6s var(--ease-out-soft); }
 .case-row__n { transition: color 0.4s; }
-
-/* Tela: cresce um pouco e acende; sobreposições aparecem por opacidade. */
+.case-row__details {
+  position: relative;
+  transition: transform 0.75s var(--ease-out-soft);
+}
+.case-row__more {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 18px);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.35s var(--ease-out-soft), transform 0.6s var(--ease-out-soft);
+}
 .case-row__screen {
+  position: relative;
+  z-index: 1;
   transform-origin: 100% 50%;
-  transition: transform 0.7s var(--ease-out-soft);
+  transition: transform 0.75s var(--ease-out-soft);
 }
 .screen-shade {
   background: rgb(10 10 10 / 0.45);
@@ -50,31 +54,19 @@
   transition: opacity 0.4s var(--ease-out-soft);
 }
 
-/* Estado ativo: hover ou foco por teclado, só onde existe mouse e tela larga. */
-@media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
-  .case-row:hover::after,
-  .case-row:focus-visible::after { transform: scaleX(1); }
-  .case-row:hover .case-row__summary,
-  .case-row:focus-visible .case-row__summary { opacity: 0; transform: translateY(-14px); }
-  .case-row:hover .case-row__more,
-  .case-row:focus-visible .case-row__more { opacity: 1; transform: none; }
-  .case-row:hover .case-row__name,
-  .case-row:focus-visible .case-row__name { transform: translateX(8px); }
-  .case-row:hover .case-row__n,
-  .case-row:focus-visible .case-row__n { color: var(--color-signal-text); }
-  .case-row:hover .case-row__screen,
-  .case-row:focus-visible .case-row__screen { transform: scale(1.04); }
-  .case-row:hover .screen-shade,
-  .case-row:focus-visible .screen-shade { opacity: 0; }
-  .case-row:hover .screen-hover-only,
-  .case-row:focus-visible .screen-hover-only { opacity: 1; }
-}
+/* Aberta (hover ou foco, só desktop com mouse): */
+.case-row.is-open { z-index: 2; }
+.case-row.is-open::after { transform: scaleX(1); }
+.case-row.is-open .case-row__n { color: var(--color-signal-text); }
+.case-row.is-open .case-row__details { transform: translate(var(--dx, 0px), var(--dy, 0px)); }
+.case-row.is-open .case-row__more { opacity: 1; transform: none; transition-delay: 0.18s; }
+.case-row.is-open .case-row__screen { transform: scale(var(--s, 1)); }
+.case-row.is-open .screen-shade { opacity: 0; }
+.case-row.is-open .screen-hover-only { opacity: 1; }
 
 /* Celular e tablet: sem hover, tudo visível e empilhado, tela já acesa. */
 @media not ((hover: hover) and (pointer: fine) and (min-width: 1024px)) {
-  .case-row__more { opacity: 1; transform: none; }
-  .case-row__summary, .case-row__more { grid-area: auto; }
-  .case-row__details { gap: 14px; }
+  .case-row__more { position: static; opacity: 1; transform: none; margin-top: 14px; }
   .screen-shade { opacity: 0; }
 }
 
@@ -90,7 +82,7 @@
 @media (prefers-reduced-motion: no-preference) {
   .screen-cursor { animation: case-pointer 12s ease-in-out infinite; }
   .screen-progress { animation: case-progress 12s linear infinite; }
-  .case-row:hover .screen-terminal span { animation: case-line 0.5s var(--ease-out-soft) both; animation-delay: calc(var(--l, 0) * 250ms); }
+  .case-row.is-open .screen-terminal span { animation: case-line 0.5s var(--ease-out-soft) both; animation-delay: calc(var(--l, 0) * 250ms); }
 }
 @keyframes case-pointer {
   0%, 100% { transform: translate(30%, 40%); }
@@ -102,5 +94,5 @@
 @keyframes case-line { from { opacity: 0.001; transform: translateY(8px); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .case-row::after, .case-row__summary, .case-row__more, .case-row__name, .case-row__screen, .screen-shade, .screen-hover-only { transition: none; }
+  .case-row::after, .case-row__details, .case-row__more, .case-row__screen, .screen-shade, .screen-hover-only { transition: none; }
 }
