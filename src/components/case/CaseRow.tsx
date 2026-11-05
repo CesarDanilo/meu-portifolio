@@ -49,7 +49,8 @@ export default function CaseRow({ item, index }: CaseRowProps) {
     setOpen(true)
 
     const el = view.current
-    if (reduced || !el || typeof el.animate !== 'function') return
+    // com vídeo real, a prévia substitui o tour pelo screenshot
+    if (item.video || reduced || !el || typeof el.animate !== 'function') return
     tour.current?.cancel()
     tour.current = el.animate(TOUR, { duration: 12000, iterations: Infinity, easing: 'ease-in-out', delay: 400 })
   }
@@ -107,7 +108,7 @@ export default function CaseRow({ item, index }: CaseRowProps) {
       </div>
 
       <div ref={screen} className="case-row__screen min-w-0">
-        <CaseScreen item={item} chrome viewRef={view} sizes="(min-width: 1024px) 45vw, 100vw" />
+        <CaseScreen item={item} chrome viewRef={view} playing={open && !reduced} sizes="(min-width: 1024px) 45vw, 100vw" />
       </div>
     </Link>
   )

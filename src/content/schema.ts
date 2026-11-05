@@ -30,6 +30,10 @@ export const caseSchema = z.object({
     z.object({ kind: z.literal('image'), src: text, alt: text }),
     z.object({ kind: z.literal('terminal'), lines: z.array(text).min(3) }),
   ]),
+  /** Vídeo real do produto. A chave aponta para `caseVideos` em media.ts. */
+  video: z.object({ src: text, label: text, duration: text, previewSeconds: z.number().positive(), note: text }).optional(),
+  /** Imagens da galeria da página do case. As chaves apontam para `caseGallery` em media.ts. */
+  gallery: z.array(z.object({ src: text, alt: text, caption: text, wide: z.boolean().optional() })).optional(),
 })
 
 export const projectSchema = z.object({

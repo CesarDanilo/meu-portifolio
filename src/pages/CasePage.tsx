@@ -4,6 +4,7 @@ import { cases } from '../content/cases'
 import ButtonLink from '../components/ui/Button'
 import TypeTag from '../components/ui/TypeTag'
 import CaseScreen from '../components/case/CaseScreen'
+import CaseGallery from '../components/case/CaseGallery'
 import { ExternalArrow, GithubMark } from '../components/ui/icons'
 
 export default function CasePage() {
@@ -53,6 +54,7 @@ export default function CasePage() {
       </dl>
 
       <CaseScreen item={item} className="mt-10" sizes="(min-width: 1320px) 1224px, 100vw" priority />
+      {item.video && <p className="meta mt-3 text-fg-3">{item.video.note}</p>}
 
       <div className="mt-18 grid gap-x-6 gap-y-4 lg:grid-cols-12 lg:gap-y-14">
         <Block label="Problema"><p>{item.problem}</p></Block>
@@ -78,6 +80,8 @@ export default function CasePage() {
         </Block>
         <Block label="Stack"><p className="meta text-fg">{item.stack.join(' · ')}</p></Block>
       </div>
+
+      {item.gallery && <CaseGallery items={item.gallery} />}
 
       <Link
         to="/cases/$slug"

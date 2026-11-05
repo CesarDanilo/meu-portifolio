@@ -1,6 +1,7 @@
+import { useEffect, useRef } from 'react'
 import type { CSSProperties, Ref } from 'react'
 import type { Case } from '../../content/schema'
-import { caseMedia, type CaseMediaKey } from '../../content/media'
+import { caseMedia, caseVideos, type CaseMediaKey, type CaseVideoKey } from '../../content/media'
 import Picture from '../ui/Picture'
 import { cn } from '../../lib/cn'
 
@@ -13,17 +14,32 @@ interface CaseScreenProps {
   priority?: boolean
   /** Caixa da imagem, usada pelo tour animado da ficha. */
   viewRef?: Ref<HTMLDivElement>
+  /** Ficha aberta: toca a prévia do vídeo, quando o case tem uma. */
+  playing?: boolean
 }
 
 const host = (c: Case) => (c.links.demo ?? c.links.code).replace('https://', '')
 
 /**
- * Tela do case. Enquanto não há vídeo, o "vídeo" é um tour pelo screenshot
- * (ou linhas de terminal, para serviços sem interface). O vídeo real entra aqui depois.
+ * Tela do case. Com vídeo, a página mostra o player e a ficha toca a prévia no hover.
+ * Sem vídeo, o "vídeo" é um tour pelo screenshot (ou linhas de terminal, para serviços sem interface).
  * Barra e player estão sempre presentes, para a altura nunca mudar no hover.
  */
-export default function CaseScreen({ item, chrome = false, sizes, className, priority, viewRef }: CaseScreenProps) {
-  const { media } = item
+export default function CaseScreen({ item, chrome = false, sizes, className, priority, viewRef, playing = false }: CaseScreenProps) {
+  const { media, video } = item
+  const files = video && caseVideos[video.src as CaseVideoKey]
+  const preview = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const el = preview.current
+    if (!el) return
+    if (playing) {
+      void el.play().catch(() => {}) // a prévia é decorativa: se o navegador recusar, fica a imagem
+    } else if (!el.paused) {
+      el.pause()
+      el.currentTime = 0
+    }
+  }, [playing])
 
   return (
     <div className={cn('flex min-w-0 flex-col border border-line-2 bg-plate', className)} style={{ viewTransitionName: `case-${item.slug}` } as CSSProperties}>
@@ -36,7 +52,21 @@ export default function CaseScreen({ item, chrome = false, sizes, className, pri
         </div>
       )}
 
-      {media.kind === 'image' ? (
+      {!chrome && video && files ? (
+        <div className="max-w-full">
+          <video
+            className="block aspect-video w-full bg-black"
+            src={files.full}
+            poster={files.poster}
+            controls
+            muted
+            playsInline
+            preload="metadata"
+            aria-label={video.label}
+            data-testid="case-video"
+          />
+        </div>
+      ) : media.kind === 'image' ? (
         <div className="relative aspect-[16/10] max-w-full overflow-hidden">
           <div ref={viewRef} className="size-full will-change-transform">
             <Picture
@@ -50,12 +80,16 @@ export default function CaseScreen({ item, chrome = false, sizes, className, pri
           {chrome && (
             <>
               <span className="screen-shade pointer-events-none absolute inset-0" aria-hidden="true" />
-              <span className="screen-hover-only pointer-events-none absolute inset-0" aria-hidden="true">
-                <span className="screen-cursor absolute inset-0 block">
-                  <span className="block size-3.5 rounded-full border-[1.5px] border-white mix-blend-difference" />
+              {files ? (
+                <video ref={preview} className="case-preview absolute inset-0 size-full object-cover object-top" src={files.preview} muted loop playsInline preload="none" aria-hidden="true" tabIndex={-1} />
+              ) : (
+                <span className="screen-hover-only pointer-events-none absolute inset-0" aria-hidden="true">
+                  <span className="screen-cursor absolute inset-0 block">
+                    <span className="block size-3.5 rounded-full border-[1.5px] border-white mix-blend-difference" />
+                  </span>
                 </span>
-              </span>
-              <span className="screen-hover-only meta absolute bottom-2.5 left-2.5 bg-black/70 px-2 py-1 text-[10px] text-white">Prévia · vídeo em breve</span>
+              )}
+              <span className="screen-hover-only meta absolute bottom-2.5 left-2.5 bg-black/70 px-2 py-1 text-[10px] text-white">{video ? 'Prévia do vídeo' : 'Prévia · vídeo em breve'}</span>
             </>
           )}
         </div>
@@ -80,10 +114,10 @@ export default function CaseScreen({ item, chrome = false, sizes, className, pri
           <span>▶</span>
           <span className="relative h-px flex-1 overflow-hidden bg-line-2">
             <span className="screen-hover-only absolute inset-0 block">
-              <span className="screen-progress block size-full origin-left bg-signal" />
+              <span className="screen-progress block size-full origin-left bg-signal" style={video ? { animationDuration: `${video.previewSeconds}s` } : undefined} />
             </span>
           </span>
-          <span>0:12</span>
+          <span>{video?.duration ?? '0:12'}</span>
         </div>
       )}
     </div>
