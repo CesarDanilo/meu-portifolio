@@ -20,8 +20,8 @@ describe('conteúdo', () => {
     expect(new Set(cases.map(c => c.slug)).size).toBe(cases.length)
   })
 
-  it('mantém os 5 cases aprovados na ordem (D-08)', () => {
-    expect(cases.map(c => c.slug)).toEqual(['chat2order', 'gastrohub', 'catalog-service', 'controle-de-revisoes', 'clinica-odontologica'])
+  it('mantém os 6 cases na ordem aprovada', () => {
+    expect(cases.map(c => c.slug)).toEqual(['chat2order', 'gastrohub', 'catalog-service', 'controle-de-revisoes', 'estoque-pro', 'clinica-odontologica'])
   })
 
   it('outros projetos, experiência, formação e stack seguem o contrato', () => {

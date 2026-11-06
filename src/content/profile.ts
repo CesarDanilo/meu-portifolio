@@ -5,7 +5,7 @@ export const profile: Profile = {
   role: 'Desenvolvedor Full Stack',
   location: 'Dourados–MS · remoto',
   headline: { before: 'Produtos web', emphasis: 'completos', after: ', do banco à interface.' },
-  lead: 'React, Node.js e PostgreSQL. Cinco cases com código aberto.',
+  lead: 'React, Node.js e PostgreSQL. Seis cases com código aberto.',
   statement: { before: 'Comecei', emphasis: 'abrindo computadores', after: '. Fiquei para entender como os sistemas funcionam por dentro.' },
   story: [
     'Desde criança eu mexia em computador. Comecei pelo hardware: montar, trocar peças, entender o papel de cada componente.',

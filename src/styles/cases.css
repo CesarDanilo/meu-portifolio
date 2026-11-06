@@ -64,6 +64,13 @@
 .case-row.is-open .screen-shade { opacity: 0; }
 .case-row.is-open .screen-hover-only { opacity: 1; }
 
+/* Prévia do vídeo: sobre a imagem, visível só com a ficha aberta. */
+.case-preview {
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-soft);
+}
+.case-row.is-open .case-preview { opacity: 1; }
+
 /* Celular e tablet: sem hover, tudo visível e empilhado, tela já acesa. */
 @media not ((hover: hover) and (pointer: fine) and (min-width: 1024px)) {
   .case-row__more { position: static; opacity: 1; transform: none; margin-top: 14px; }
