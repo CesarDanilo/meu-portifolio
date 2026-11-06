@@ -3,10 +3,17 @@ import { expect, test } from '@playwright/test'
 // Garante que nenhuma revelação ao rolar fique presa escondida (bug do protótipo v15).
 test('rolando a página inteira, todo bloco com revelação termina visível', async ({ page }) => {
   await page.goto('/')
-  const height = await page.evaluate(() => document.documentElement.scrollHeight)
-  for (let y = 0; y < height; y += 400) {
-    await page.mouse.wheel(0, 400)
-    await page.waitForTimeout(60)
+  // Rola em passos de 400 px, esperando um quadro renderizado a cada passo: o IntersectionObserver
+  // só mede em quadros, e em máquina lenta várias rodas de mouse caíam no mesmo quadro e pulavam
+  // blocos inteiros. A altura é lida a cada passo, porque a página cresce enquanto as imagens carregam.
+  for (let i = 0; i < 200; i++) {
+    const atBottom = await page.evaluate(async () => {
+      window.scrollBy({ top: 400, behavior: 'instant' })
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))
+      return window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1
+    })
+    await page.waitForTimeout(30)
+    if (atBottom) break
   }
   await page.waitForTimeout(1500)
   const hidden = await page.evaluate(() =>
