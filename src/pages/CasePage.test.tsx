@@ -32,7 +32,7 @@ describe('página do case', () => {
     expect(await screen.findByText('Página não encontrada.')).toBeInTheDocument()
   })
 
-  it('a home lista os 5 cases, cada um levando à sua página', async () => {
+  it('a home lista todos os cases, cada um levando à sua página', async () => {
     renderAt('/')
     for (const c of cases) {
       expect(await screen.findByRole('link', { name: new RegExp(c.name) })).toHaveAttribute('href', `/cases/${c.slug}`)

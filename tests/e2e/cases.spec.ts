@@ -24,7 +24,7 @@ test.describe('cases', () => {
     test.skip(!isMobile, 'celular')
     await page.goto('/#cases')
     const more = page.locator('.case-row__more')
-    await expect(more).toHaveCount(5)
+    await expect(more).toHaveCount(6)
     for (const el of await more.all()) await expect(el).toHaveCSS('opacity', '1')
   })
 
