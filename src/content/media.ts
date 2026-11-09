@@ -1,5 +1,17 @@
 // Imagens dos cases, otimizadas no build (avif, webp e jpg) pelo vite-imagetools. As chaves batem com `media.src` em cases.ts.
-import chat2order from '../assets/cases/chat2order.png?w=640;960;1280;1672&format=avif;webp;jpg&as=picture'
+import chat2order from '../assets/cases/chat2order.jpg?w=640;960;1280;1600&format=avif;webp;jpg&as=picture'
+import chat2orderVideo from '../assets/cases/chat2order/demo.mp4'
+import chat2orderPreview from '../assets/cases/chat2order/preview.mp4'
+import chat2orderPoster from '../assets/cases/chat2order/poster.jpg'
+import chat2orderHero from '../assets/cases/chat2order/showcase-01.png?w=800;1600;2200&format=webp;jpg&quality=88&as=picture'
+import chat2orderPaineis from '../assets/cases/chat2order/showcase-02.png?w=800;1600;2200&format=webp;jpg&quality=88&as=picture'
+import chat2orderFluxo from '../assets/cases/chat2order/showcase-03.png?w=800;1600;2200&format=webp;jpg&quality=88&as=picture'
+import chat2orderPedidos from '../assets/cases/chat2order/03-pedidos.png?w=800;1600&format=webp;jpg&quality=88&as=picture'
+import chat2orderStatus from '../assets/cases/chat2order/05-status-regras.png?w=800;1600&format=webp;jpg&quality=88&as=picture'
+import chat2orderNovoPedido from '../assets/cases/chat2order/06-novo-pedido.png?w=800;1600&format=webp;jpg&quality=88&as=picture'
+import chat2orderProdutos from '../assets/cases/chat2order/07-produtos.png?w=800;1600&format=webp;jpg&quality=88&as=picture'
+import chat2orderExtensao from '../assets/cases/chat2order/10-extensao-importada.png?w=800;1600&format=webp;jpg&quality=88&as=picture'
+import chat2orderEscuro from '../assets/cases/chat2order/12-dashboard-escuro.png?w=800;1600&format=webp;jpg&quality=88&as=picture'
 import clinica from '../assets/cases/clinica.png?w=640;960;1280;1901&format=avif;webp;jpg&as=picture'
 import gastrohub from '../assets/cases/gastrohub.jpg?w=480;800&format=avif;webp;jpg&as=picture'
 import revisoes from '../assets/cases/revisoes.jpg?w=640;960;1280;1600&format=avif;webp;jpg&as=picture'
@@ -38,6 +50,7 @@ export const caseMedia = { chat2order, gastrohub, revisoes, estoquePro, clinica 
 export type CaseMediaKey = keyof typeof caseMedia
 
 export const caseVideos = {
+  chat2order: { full: chat2orderVideo, preview: chat2orderPreview, poster: chat2orderPoster },
   revisoes: { full: revisoesVideo, preview: revisoesPreview, poster: revisoesPoster },
   estoquePro: { full: estoqueVideo, preview: estoquePreview, poster: estoquePoster },
 } as const
@@ -45,6 +58,15 @@ export const caseVideos = {
 export type CaseVideoKey = keyof typeof caseVideos
 
 export const caseGallery = {
+  chat2orderHero,
+  chat2orderPaineis,
+  chat2orderFluxo,
+  chat2orderExtensao,
+  chat2orderPedidos,
+  chat2orderStatus,
+  chat2orderNovoPedido,
+  chat2orderProdutos,
+  chat2orderEscuro,
   revisoesHero,
   revisoesModulos,
   revisoesFluxo,
